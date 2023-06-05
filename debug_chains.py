@@ -3,6 +3,12 @@ from typing import Any, Dict, List
 from langchain.chains.qa_with_sources.retrieval import RetrievalQAWithSourcesChain
 from langchain.docstore.document import Document
 from pydantic import BaseModel, Field
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # take environment variables from .env.
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
 
 class DebugRetrievalQAWithSourcesChain(RetrievalQAWithSourcesChain):
     debug: bool = Field(False, description="Whether or not to print debug info.")

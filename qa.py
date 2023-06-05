@@ -9,6 +9,11 @@ from langchain.prompts.chat import (
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate,
 )
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # take environment variables from .env.
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Setup the logging configuration
 # Logging is useful for tracking the application's activities and catching any unexpected behaviors.

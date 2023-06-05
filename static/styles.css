@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#chat-container {
+    width: 600px;
+    margin: 0 auto;
+}
+
+#chat {
+    height: 400px;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-bottom: 8px;
+    overflow-y: scroll;
+    background-color: #fafafa;  /* Light grey background to make the chat area visible */
+}
+
+#form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#input {
+    flex-grow: 1;
+    margin-right: 8px;
+}

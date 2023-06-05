@@ -5,6 +5,11 @@ import faiss
 from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
 import pickle
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # take environment variables from .env.
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Prepare list of all CSV file paths
 file_paths = list(Path("Data/").glob("**/*.csv"))

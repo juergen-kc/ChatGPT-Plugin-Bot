@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #chat-container {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        #chat {
+            height: 400px;
+            border: 1px solid #cccccc;
+            padding: 8px;
+            margin-bottom: 8px;
+            overflow-y: scroll;
+            background-color: #fafafa;  /* Light grey background to make the chat area visible */
+        }
+
+        #form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        #input {
+            flex-grow: 1;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat"></div>
+        <form id="form">
+            <input id="input" type="text">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(function() {
+        $('#form').on('submit', function(e) {
+            console.log("Form submission detected");
+            try {
+                e.preventDefault();
+                console.log("Default form submission prevented");
+                let question = $('#input').val();
+                if (!question.trim()) {
+                    return;  // If question is empty or all whitespace, do not send it
+                }
+                $('#input').val('');
+                $('#chat').append($('<p>').text('You: ' + question));
+                $.ajax({
+                    url: '/ask',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ query: question }),
+                    success: function(response) {
+                        $('#chat').append($('<p>').text('AI: ' + response.answer));
+                        $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("An error occurred during the request:", error);
+                        $('#chat').append($('<p>').text('AI: Sorry, I am unable to process your request at the moment.'));
+                        $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                    }
+                });
+            } catch (error) {
+                console.error("An error occurred during form submission:", error);
+            }
+        });
+    });
+</script>
+</body>
+</html>
